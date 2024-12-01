@@ -1,9 +1,11 @@
 import React, { useState } from "react";
 import axios, { AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios';
+import { useNavigate } from "react-router-dom";
 const Register: React.FC = () => {
     const [username, setUsername] = useState("")
     const [password, setPassword] = useState("")
     const [error, setError] = useState("")
+    const navigate = useNavigate()
 
     const handleRegister = async (e: React.FormEvent) => {
         e.preventDefault()
@@ -12,8 +14,9 @@ const Register: React.FC = () => {
                 username,
                 password
             });
-            const { token } = response.data.access_token
             alert("Register successful!")
+            localStorage.setItem("token", response.data.access_token)
+            navigate("/home")
         }catch {
             setError("Register error!")
         }

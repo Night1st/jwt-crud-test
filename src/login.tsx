@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import axios, { AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios';
-import { useNavigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 
 const Login: React.FC = () => {
     const [username, setUsername] = useState("")
@@ -15,9 +15,9 @@ const Login: React.FC = () => {
                 username,
                 password
             });
-            console.log(response.data.access_token)
             localStorage.setItem("token", response.data.access_token)
             navigate("/home")
+            alert("Login success!")
         }catch {
             setError("Login error!")
         }
@@ -71,6 +71,9 @@ const Login: React.FC = () => {
                     </button>
                     {error && <p className="text-red-500">{error}</p>}
                 </form>
+                    <button onClick={() => {navigate("/register")}} className="bg-black text-white px-4 py-2 mt-2">
+                    Register
+                    </button>
                 </div>
             </div>
         </>
