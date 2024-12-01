@@ -73,12 +73,12 @@ const CustomerList = () => {
 
     const [data, setData] = useState<any[]>([]);
     const [error, setError] = useState("");
+    const [fetchTrigger, setFetchTrigger] = useState(false);
 
     useEffect(() => {
         const fetchCustomers = async () => {
             try {
                 const response = await api.get("/customers")
-                console.log(response.data.results)
                 setData(response.data.results)
             } catch (err: any) {
                 if (err.response?.status === 401) {
@@ -89,7 +89,7 @@ const CustomerList = () => {
             }
         }
         fetchCustomers()
-    }, [])
+    }, [fetchTrigger])
     const table = useReactTable({
         data,
         columns,

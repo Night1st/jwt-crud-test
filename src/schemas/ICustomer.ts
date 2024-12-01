@@ -4,7 +4,7 @@ export interface ICustomer {
     status: number,
     source: number,
     social_media: number,
-    service: number,
+    service: string | any,
     full_name: string,
     gender: string,
     date_of_birth: Date,
@@ -17,10 +17,11 @@ export interface ICustomer {
     ward: string,
     detailed_info: string,
     notes: string,
-    comment: IComment
+    comments: IComment[]
 }
 
-interface IComment {
+export interface IComment {
+    id?: string,
     title: string,
     time: Date,
     status_id: number
